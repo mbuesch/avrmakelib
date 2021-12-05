@@ -1,7 +1,6 @@
 ######################################################
 # AVR make library                                   #
 # Copyright (c) 2015-2021 Michael Buesch <m@bues.ch> #
-# Version 1.12                                       #
 #                                                    #
 # Licensed under the Apache License version 2.0      #
 # or the MIT license, at your option.                #
@@ -43,9 +42,8 @@ GREP			:= grep
 TRUE			:= true
 TEST			:= test
 AVRDUDE			:= avrdude
-MYSMARTUSB		:= mysmartusb.py
+MYSMARTUSB		:= avrmakelib/mysmartusb.py
 DOXYGEN			:= doxygen
-PYTHON2			:= python2
 PYTHON3			:= python3
 SPARSE			:= sparse
 
@@ -66,7 +64,6 @@ QUIET_DEPEND		= $(Q:@=@$(ECHO) '     DEPEND   '$@;)$(CC)
 QUIET_OBJCOPY		= $(Q:@=@$(ECHO) '     OBJCOPY  '$@;)$(OBJCOPY)
 QUIET_OBJDUMP		= $(Q:@=@$(ECHO) '     OBJDUMP  '$@;)$(OBJDUMP)
 QUIET_SIZE		= $(Q:@=@$(ECHO) '     SIZE     '$@;)$(SIZE)
-QUIET_PYTHON2		= $(Q:@=@$(ECHO) '     PYTHON2  '$@;)$(PYTHON2)
 QUIET_PYTHON3		= $(Q:@=@$(ECHO) '     PYTHON3  '$@;)$(PYTHON3)
 QUIET_RM		= $(Q:@=@$(ECHO) '     RM       '$@;)$(RM)
 QUIET_SED		= $(Q:@=@$(ECHO) '     SED      '$@;)$(SED)
