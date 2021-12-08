@@ -5,7 +5,6 @@
 # Licensed under the Apache License version 2.0
 # or the MIT license, at your option.
 # SPDX-License-Identifier: Apache-2.0 OR MIT
-#
 """
 
 import sys
@@ -97,25 +96,15 @@ class MySmartUsb(object):
 			ret = ret[ret.find(b'\xF7')+1:]
 			ret = ret[:ret.find(b'\xF7')]
 			return ret
-		ret = self.serial.read(1)
-		if ret == b"\x00" or ret == b"\x0D":
-			ret = self.serial.read(5)
-		else:
-			ret += self.serial.read(4)
+		ret = self.serial.read(5)
+		while ret[0:2] != b"\xF7\xB1" or ret[3:5] != b"\x0D\x0A":
+			ret = ret[1:] + self.serial.read(1)
 		if self.debug:
 			print("Command returned: " + hexdump(ret))
-		if ret[0:2] != b"\xF7\xB1":
-			raise MySmartUsbError(
-				"Invalid command return prefix: %02X%02X" %\
-				(ret[0], ret[1]))
 		if cmd != b'i' and ret[2] != ord(cmd):
 			raise MySmartUsbError(
 				"Invalid command return: %02X" %\
 				(ret[2]))
-		if ret[3:5] != b"\x0D\x0A":
-			raise MySmartUsbError(
-				"Invalid command return postfix: %02X%02X" %\
-				(ret[3], ret[4]))
 		return bytes( (ret[2], ) )
 
 def usage():
