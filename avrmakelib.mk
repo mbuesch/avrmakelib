@@ -179,16 +179,16 @@ AVRDUDE_PROGRAMMER	:= $(PROGRAMMER)
 endif
 
 ifeq ($(PROGPORT),)
-ifeq ($(PROGRAMMER),avr910)
+ifeq ($(AVRDUDE_PROGRAMMER),avr910)
 PROGPORT		:= /dev/ttyUSB0
 endif
-ifeq ($(PROGRAMMER),avrisp2)
+ifeq ($(AVRDUDE_PROGRAMMER),avrisp2)
 PROGPORT		:= usb
 endif
-ifeq ($(PROGRAMMER),usbasp)
+ifeq ($(AVRDUDE_PROGRAMMER),usbasp)
 PROGPORT		:= usb
 endif
-ifeq ($(PROGRAMMER),usbasp-clone)
+ifeq ($(AVRDUDE_PROGRAMMER),usbasp-clone)
 PROGPORT		:= usb
 endif
 endif
