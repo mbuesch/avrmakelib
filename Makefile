@@ -24,8 +24,12 @@ AVRDUDE_ARCH		:= m32
 FUNC_STACK_LIMIT	:= 32
 
 # Programmer selection.
-# Values can be:  avrisp2, mysmartusb
 PROGRAMMER		:= avrisp2
+#PROGRAMMER		:= usbasp
+#PROGRAMMER		:= usbasp-clone
+#PROGRAMMER		:= avr910
+#PROGRAMMER		:= mysmartusb
+PROGPORT		:=
 
 # Instrumentation
 INSTRUMENT_FUNC		:=

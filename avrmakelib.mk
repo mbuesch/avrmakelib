@@ -1,6 +1,6 @@
 ######################################################
 # AVR make library                                   #
-# Copyright (c) 2015-2021 Michael Buesch <m@bues.ch> #
+# Copyright (c) 2015-2022 Michael Buesch <m@bues.ch> #
 #                                                    #
 # Licensed under the Apache License version 2.0      #
 # or the MIT license, at your option.                #
@@ -172,18 +172,25 @@ BOOT_SPARSEFLAGS	:= $(subst gnu11,gnu99,$(BOOT_CFLAGS)) \
 AVRDUDE_SPEED		?= 1
 AVRDUDE_SLOW_SPEED	?= 200
 
-AVRDUDE_PROGRAMMER	:=
 ifeq ($(PROGRAMMER),mysmartusb)
 AVRDUDE_PROGRAMMER	:= avr910
+else
+AVRDUDE_PROGRAMMER	:= $(PROGRAMMER)
+endif
+
+ifeq ($(PROGPORT),)
+ifeq ($(PROGRAMMER),avr910)
 PROGPORT		:= /dev/ttyUSB0
 endif
 ifeq ($(PROGRAMMER),avrisp2)
-AVRDUDE_PROGRAMMER	:= avrisp2
 PROGPORT		:= usb
 endif
-
-ifeq ($(AVRDUDE_PROGRAMMER),)
-$(error Invalid PROGRAMMER specified)
+ifeq ($(PROGRAMMER),usbasp)
+PROGPORT		:= usb
+endif
+ifeq ($(PROGRAMMER),usbasp-clone)
+PROGPORT		:= usb
+endif
 endif
 
 define _programmer_cmd_pwrcycle
