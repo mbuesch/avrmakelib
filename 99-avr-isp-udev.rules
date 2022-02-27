@@ -1,0 +1,6 @@
+# UDEV rules for AVR ISP.
+
+# avrisp2
+SUBSYSTEM=="usb", ACTION=="add", ATTR{idVendor}=="03eb", ATTR{idProduct}=="2104", MODE="660", GROUP="plugdev"
+# usbasp-clone
+SUBSYSTEM=="usb", ACTION=="add", ATTR{idVendor}=="16c0", ATTR{idProduct}=="05dc", MODE="660", GROUP="plugdev"
