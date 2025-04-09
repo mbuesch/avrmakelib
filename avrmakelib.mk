@@ -1,6 +1,6 @@
 ######################################################
 # AVR make library                                   #
-# Copyright (c) 2015-2022 Michael Buesch <m@bues.ch> #
+# Copyright (c) 2015-2025 Michael Buesch <m@bues.ch> #
 #                                                    #
 # Licensed under the Apache License version 2.0      #
 # or the MIT license, at your option.                #
@@ -134,8 +134,8 @@ INSTRUMENT_CFLAGS	:= -DINSTRUMENT_FUNCTIONS=1 \
 			   -finstrument-functions \
 			   -finstrument-functions-exclude-file-list=.h
 
-MAIN_SPARSEFLAGS	:= -gcc-base-dir=/usr/lib/avr \
-			   -I/usr/lib/avr/include \
+MAIN_SPARSEFLAGS	:= -gcc-base-dir=$(shell which avr-gcc | xargs -0 dirname)/../avr \
+			   -I$(shell which avr-gcc | xargs -0 dirname)/../avr/include \
 			   -D__STDC_HOSTED__=1 \
 			   -D__AVR_ARCH__=5 \
 			   -D__AVR_$(subst TINY,tiny,$(subst MEGA,mega,$(call _uppercase,$(GCC_ARCH))))__=1 \
